@@ -16,6 +16,11 @@ const userSchema: Schema = new Schema(
       required: true,
       trim: true,
     },
+    fullName: {
+      type: String,
+      required: true,
+     
+    },
     password: {
       type: String,
       required: true,
@@ -30,6 +35,7 @@ const userSchema: Schema = new Schema(
       type: Boolean,
       default: false,
     },
+    
     profileImage: {
       type: String,
       default: "",

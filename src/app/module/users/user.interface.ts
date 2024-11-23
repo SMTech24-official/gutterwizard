@@ -3,12 +3,11 @@ export interface IUser {
     email: string;
     username: string;
     password: string;
+    fullName: string;
     role: 'admin' | 'user'|"superAdmin";
     isVerified:boolean;
     profileImage:string;
-    createdAt: Date;
-    updatedAt: Date;
-  
+
 }
 
 

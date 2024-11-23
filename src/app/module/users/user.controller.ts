@@ -14,7 +14,7 @@ const createUser= catchAsync(async (req, res) => {
     });
   });
 const createAdmin= catchAsync(async (req, res) => {
- const result=await userServices.createAdmin(req.body) 
+ const result=await userServices.createAdmin(req) 
   
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -23,6 +23,8 @@ const createAdmin= catchAsync(async (req, res) => {
       data: result,
     });
   });
+
+
 const activeAccount= catchAsync(async (req, res) => {
   const id=req.query.id
  const result=await userServices.activeAccount(id) 
@@ -34,10 +36,22 @@ const activeAccount= catchAsync(async (req, res) => {
       data: result,
     });
   });
+const updateProfile= catchAsync(async (req, res) => {
+  const id=req.query.id
+ const result=await userServices.updateProfile(req) 
+  
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Your profile update successfully',
+      data: result,
+    });
+  });
   
 
   export const userController={
     createUser,
+    updateProfile,
     activeAccount,
     createAdmin
   }

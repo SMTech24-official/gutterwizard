@@ -4,7 +4,6 @@ import express, { Application, Request, Response } from 'express';
 import globalErrorHandler from './app/middlewares/globalErrorhandler';
 import notFound from './app/middlewares/notFound';
 import router from './app/routes';
-import { createAdmin } from './app/db/seed.admin';
 
 const app: Application = express();
 
