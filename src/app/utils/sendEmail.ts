@@ -17,7 +17,6 @@ export const sendEmail = async (to: string| string[], html: string,subject:strin
   });
 
   const recipients = Array.isArray(to) ? to.join(", ") : to;
-console.log(recipients)
    await transporter.sendMail({
     from: 'akonhasan680@gmail.com', // sender address
     to:recipients, // list of receivers
