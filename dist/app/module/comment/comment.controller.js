@@ -12,52 +12,44 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userController = void 0;
+exports.commentController = void 0;
 const http_status_1 = __importDefault(require("http-status"));
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
-const user_service_1 = require("./user.service");
-const createUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_service_1.userServices.createUser(req.body);
+const comment_services_1 = require("./comment.services");
+// get blog by id
+const createComment = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield comment_services_1.commentServices.createComment(req);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: 'User registered successfully. Please check your email for account activation.',
+        message: "create comment successfully",
         data: result,
     });
 }));
-const createAdmin = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_service_1.userServices.createAdmin(req);
+// get blog by id
+const updateComment = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield comment_services_1.commentServices.updateComment(req);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: 'User registered successfully. Please check your email for account activation.',
+        message: "updated comment successfully",
         data: result,
     });
 }));
-const activeAccount = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = req.query.id;
-    const result = yield user_service_1.userServices.activeAccount(id);
+const getAllComments = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    const query = req.query;
+    const result = yield comment_services_1.commentServices.getAllComments(id, query);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: 'account activete successfully',
+        message: "get all comment successfully",
         data: result,
     });
 }));
-const updateProfile = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = req.query.id;
-    const result = yield user_service_1.userServices.updateProfile(req);
-    (0, sendResponse_1.default)(res, {
-        statusCode: http_status_1.default.OK,
-        success: true,
-        message: 'Your profile update successfully',
-        data: result,
-    });
-}));
-exports.userController = {
-    createUser,
-    updateProfile,
-    activeAccount,
-    createAdmin
+exports.commentController = {
+    createComment,
+    updateComment,
+    getAllComments,
 };

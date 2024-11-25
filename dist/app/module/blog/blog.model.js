@@ -23,46 +23,31 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Blog = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
-// Mongoose Schema
-const userSchema = new mongoose_1.Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        lowercase: true,
-    },
-    username: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    fullName: {
+const blogSchema = new mongoose_1.Schema({
+    banner: {
         type: String,
         required: true,
     },
-    password: {
+    category: {
         type: String,
         required: true,
     },
-    role: {
+    title: {
         type: String,
-        enum: ["admin", "user", "superAdmin"],
-        default: "user",
         required: true,
     },
-    isVerified: {
-        type: Boolean,
-        default: false,
-    },
-    profileImage: {
+    content: {
         type: String,
-        default: "",
+        required: true,
+    },
+    authorId: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: 'User', // Assuming there is a User model
+        required: true,
     },
 }, {
-    timestamps: true, // Automatically adds createdAt and updatedAt
+    timestamps: true, // Automatically manage createdAt and updatedAt
 });
-// Export the model
-exports.User = mongoose_1.default.model("User", userSchema);
+exports.Blog = mongoose_1.default.model('Blog', blogSchema);

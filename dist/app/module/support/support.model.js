@@ -23,46 +23,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Support = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
-// Mongoose Schema
-const userSchema = new mongoose_1.Schema({
-    email: {
+const SupportSchema = new mongoose_1.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true, match: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ },
+    phone: { type: String, required: true },
+    status: {
         type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        lowercase: true,
+        enum: ["pending", "resolved"],
+        default: "pending",
     },
-    username: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    fullName: {
-        type: String,
-        required: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    role: {
-        type: String,
-        enum: ["admin", "user", "superAdmin"],
-        default: "user",
-        required: true,
-    },
-    isVerified: {
-        type: Boolean,
-        default: false,
-    },
-    profileImage: {
-        type: String,
-        default: "",
-    },
-}, {
-    timestamps: true, // Automatically adds createdAt and updatedAt
-});
-// Export the model
-exports.User = mongoose_1.default.model("User", userSchema);
+    message: { type: String, required: true },
+}, { timestamps: true } // Automatically add createdAt and updatedAt fields
+);
+// Export the Mongoose model
+exports.Support = mongoose_1.default.model('Support', SupportSchema);

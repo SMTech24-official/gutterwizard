@@ -23,46 +23,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Subscription = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
-// Mongoose Schema
-const userSchema = new mongoose_1.Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        lowercase: true,
-    },
-    username: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    fullName: {
-        type: String,
-        required: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    role: {
-        type: String,
-        enum: ["admin", "user", "superAdmin"],
-        default: "user",
-        required: true,
-    },
-    isVerified: {
-        type: Boolean,
-        default: false,
-    },
-    profileImage: {
-        type: String,
-        default: "",
-    },
+const SubscriptionSchema = new mongoose_1.Schema({
+    email: { type: String, required: true, unique: true },
 }, {
-    timestamps: true, // Automatically adds createdAt and updatedAt
+    timestamps: true, // Automatically manage createdAt and updatedAt
 });
-// Export the model
-exports.User = mongoose_1.default.model("User", userSchema);
+exports.Subscription = mongoose_1.default.model("Subscription", SubscriptionSchema);

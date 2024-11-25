@@ -15,8 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendEmail = void 0;
 const config_1 = __importDefault(require("../config"));
 const nodemailer_1 = __importDefault(require("nodemailer"));
-const sendEmail = (to, html) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(config_1.default.mail, config_1.default.mail_pass, to);
+const sendEmail = (to, html, subject) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const transporter = nodemailer_1.default.createTransport({
             host: 'smtp.gmail.com',
@@ -28,10 +27,11 @@ const sendEmail = (to, html) => __awaiter(void 0, void 0, void 0, function* () {
                 pass: config_1.default.mail_pass,
             },
         });
+        const recipients = Array.isArray(to) ? to.join(", ") : to;
         yield transporter.sendMail({
             from: 'akonhasan680@gmail.com', // sender address
-            to, // list of receivers
-            subject: 'Please active your account!', // Subject line
+            to: recipients, // list of receivers
+            subject, // Subject line
             text: '', // plain text body
             html, // html body
         });

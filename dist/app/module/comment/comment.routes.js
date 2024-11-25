@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.commentRouter = void 0;
+const express_1 = require("express");
+const fileUploads_1 = require("../../helpers/fileUploads");
+const comment_controller_1 = require("./comment.controller");
+const router = (0, express_1.Router)();
+router.post("/create", fileUploads_1.fileUploader.uploadSingle, comment_controller_1.commentController.createComment);
+router.put("/update/:id", fileUploads_1.fileUploader.uploadSingle, comment_controller_1.commentController.updateComment);
+router.get("/:id", comment_controller_1.commentController.getAllComments);
+exports.commentRouter = router;
