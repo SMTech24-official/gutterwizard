@@ -5,7 +5,7 @@ import { IBlog } from './blog.interface';
 
 const blogSchema = new Schema<IBlog>(
   {
-    image: {
+    banner: {
       type: String,
       required: true,
     },

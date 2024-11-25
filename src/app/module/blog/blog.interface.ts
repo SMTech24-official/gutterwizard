@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
 export interface IBlog{
     id?: string;
-    image: string;
+    banner: string;
     category: string;
     title: string;
     content: string;

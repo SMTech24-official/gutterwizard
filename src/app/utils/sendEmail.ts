@@ -2,7 +2,7 @@ import config from "../config";
 
 import  nodemailer from "nodemailer"
 
-export const sendEmail = async (to: string, html: string,subject:string) => {
+export const sendEmail = async (to: string| string[], html: string,subject:string) => {
  
  try {
   const transporter = nodemailer.createTransport({
@@ -16,9 +16,11 @@ export const sendEmail = async (to: string, html: string,subject:string) => {
     },
   });
 
+  const recipients = Array.isArray(to) ? to.join(", ") : to;
+console.log(recipients)
    await transporter.sendMail({
     from: 'akonhasan680@gmail.com', // sender address
-    to, // list of receivers
+    to:recipients, // list of receivers
     subject, // Subject line
     text: '', // plain text body
     html, // html body

@@ -30,7 +30,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // upload single image
-const uploadSingle = upload.single("profileImage");
+const uploadSingle = upload.single("image");
 
 // upload multiple image
 const uploadMultiple = upload.fields([
@@ -89,7 +89,7 @@ const uploadToDigitalOcean = async (
     await fs.access(file.path);
 
     // Prepare file upload parameters
-    const Key = `buksybuzz/${Date.now()}_${file.originalname}`;
+    const Key = `gutterWizzred/${Date.now()}_${file.originalname}`;
     const uploadParams = {
       Bucket: process.env.DO_SPACE_BUCKET || "", // Replace with your DigitalOcean Space bucket name
       Key,

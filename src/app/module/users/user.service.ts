@@ -146,7 +146,7 @@ const activeAccount = async (id: any) => {
     throw new AppError(httpStatus.NOT_FOUND, "User not Found");
   }
   if (user?.isVerified) {
-    throw new AppError(httpStatus.CONFLICT, "You account is already actived");
+    throw new AppError(httpStatus.CONFLICT, "You account is already activated");
   }
   await User.findOneAndUpdate({ _id: id }, { isActive: true });
   return { message: "Your account active successfully" };
