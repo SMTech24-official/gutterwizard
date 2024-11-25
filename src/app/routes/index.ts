@@ -4,6 +4,7 @@ import { AuthRoutes } from "../module/auth/auth.route";
 import { BlogRouter } from "../module/blog/blog.routes";
 import { commentRouter } from "../module/comment/comment.routes";
 import { SubscriptionRouter } from "../module/subscription/subscription.route";
+import { SupportRouter } from "../module/support/support.routes";
 ;
 
 const router = Router();
@@ -22,6 +23,9 @@ const moduleRoutes=[
     },
     {   path: '/subScriptions',
         route: SubscriptionRouter
+    },
+    {   path: '/support',
+        route: SupportRouter
     },
 
 ]
