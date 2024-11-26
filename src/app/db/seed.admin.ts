@@ -5,6 +5,7 @@ export const createAdmin = async () => {
   const hasPassword = await argon2.hash("12345678");
   const data = {
     email: "akonhasan680a@gmail.com",
+    fullName:"akonhasan",
     username: "akonhasan",
     password: hasPassword,
     isVerified: true,

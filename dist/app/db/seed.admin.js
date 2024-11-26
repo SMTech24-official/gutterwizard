@@ -39,6 +39,7 @@ const createAdmin = () => __awaiter(void 0, void 0, void 0, function* () {
     const hasPassword = yield argon2.hash("12345678");
     const data = {
         email: "akonhasan680a@gmail.com",
+        fullName: "akonhasan",
         username: "akonhasan",
         password: hasPassword,
         isVerified: true,
