@@ -25,7 +25,6 @@ jobs:
         git pull origin main
         npm install
         npm run build
-        npm run dev
         tmux kill-session -t api || true
-        tmux new -d -s api "npm start"
+        tmux new -d -s api "npm run dev"
         EOF
