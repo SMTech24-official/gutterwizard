@@ -1,0 +1,31 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Deploy to VPS
+      run: |
+        ssh -o StrictHostKeyChecking=no user@167.71.143.14 << 'EOF'
+        cd /var/www/api.londongutterclean.co.uk
+        git pull origin main
+        npm install
+        npm run build
+        npm run dev
+        tmux kill-session -t api || true
+        tmux new -d -s api "npm start"
+        EOF
