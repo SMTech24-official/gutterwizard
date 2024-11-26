@@ -13,10 +13,13 @@ export const createAdmin = async () => {
   };
 
 
-  
+
   const user=await User.findOne({email:data.email,role: "admin"});
   if (!user) {
 
+
+
+    
     const user=  await User.create(data)
     
   }
