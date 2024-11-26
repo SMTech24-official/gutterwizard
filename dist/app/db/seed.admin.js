@@ -40,6 +40,7 @@ const createAdmin = () => __awaiter(void 0, void 0, void 0, function* () {
     const data = {
         email: "akonhasan680a@gmail.com",
         username: "akonhasan",
+        fullName: "akonhasan",
         password: hasPassword,
         isVerified: true,
         role: "admin"
