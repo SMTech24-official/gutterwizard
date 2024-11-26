@@ -11,6 +11,9 @@ export const createAdmin = async () => {
     isVerified: true,
     role: "admin"
   };
+
+
+  
   const user=await User.findOne({email:data.email,role: "admin"});
   if (!user) {
 
