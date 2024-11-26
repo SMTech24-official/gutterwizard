@@ -6,6 +6,7 @@ export const createAdmin = async () => {
   const data = {
     email: "akonhasan680a@gmail.com",
     username: "akonhasan",
+    fullName: "akonhasan",
     password: hasPassword,
     isVerified: true,
     role: "admin"
