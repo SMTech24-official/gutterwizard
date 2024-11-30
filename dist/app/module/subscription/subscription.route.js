@@ -11,5 +11,5 @@ const constant_1 = require("../../utils/constant");
 const router = (0, express_1.Router)();
 router.post("/add-mail", subscription_controller_1.subscriptionController.addMailIntoBD);
 router.get("/", (0, auth_1.default)(constant_1.USER_ROLE.admin), subscription_controller_1.subscriptionController.getAllSubscriptions);
-router.get("/send-mail", (0, auth_1.default)(constant_1.USER_ROLE.admin), subscription_controller_1.subscriptionController.sendMailMultipleUser);
+router.post("/send-mail", (0, auth_1.default)(constant_1.USER_ROLE.admin), subscription_controller_1.subscriptionController.sendMailMultipleUser);
 exports.SubscriptionRouter = router;

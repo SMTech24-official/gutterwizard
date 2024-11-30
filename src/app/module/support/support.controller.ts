@@ -21,12 +21,13 @@ const createSupport= catchAsync(async (req, res) => {
     const limit = parseInt(req.query.limit as string) || 10;
     const query = req.query
     const result = await SupportService.getAllSupportRequests(page, limit,query);
-  
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
       message: "get all support request success",
-      data: result,
+      data: result.supportRequests,
+      meta:result.meta
+    
     });
   });
 

@@ -37,7 +37,8 @@ const getAllSupportRequest = (0, catchAsync_1.default)((req, res) => __awaiter(v
         statusCode: http_status_1.default.OK,
         success: true,
         message: "get all support request success",
-        data: result,
+        data: result.supportRequests,
+        meta: result.meta
     });
 }));
 // get single support

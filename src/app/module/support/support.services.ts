@@ -9,20 +9,44 @@ const createSupport=async(payload:any)=>{
     return response;
 }
 
-const getAllSupportRequests = async (page: number = 1, limit: number = 10,query:any) => {
+const getAllSupportRequests = async (page: number = 1, limit: number = 10, query: any) => {
+  const skip = (page - 1) * limit;
 
-    const skip = (page - 1) * limit;
-  const baseQuery:Partial<ISupports>={}
-  if(query.status){
-    baseQuery.status=query.status
+  // Prepare the base query (filtering based on query params)
+  const baseQuery: Partial<ISupports> = {};
+
+  // Check for filtering conditions (e.g., status)
+  if (query.status) {
+    baseQuery.status = query.status;
   }
+
+  try {
+    // Get the total number of matching support requests (for pagination purposes)
+    const totalCount = await Support.countDocuments(baseQuery);
+
+    // Get the paginated support requests based on the filters and pagination
     const supportRequests = await Support.find(baseQuery)
-      .sort({ createdAt: -1 })
+      .sort({ createdAt: -1 }) // Sorting by created date in descending order
       .skip(skip)
       .limit(limit);
+      const totalPages = Math.ceil(totalCount / limit);
+
+      const meta:any = {
+        total: totalCount,     // Total number of support requests matching the query
+        totalPages,            // Total number of pages
+        page,                  // Current page number
+        limit,                 // Limit per page
+      };
   
-    return supportRequests;
-  };
+      // Prepare response data
+  return {
+        supportRequests,
+        meta,
+      };
+  } catch (error:any) {
+    throw new Error('Error fetching support requests: ' + error.message);
+  }
+};
 
   const getSingleSupportRequest = async (id: string) => {
     const supportRequest = await Support.findById(id);

@@ -23,15 +23,36 @@ const createSupport = (payload) => __awaiter(void 0, void 0, void 0, function* (
 });
 const getAllSupportRequests = (...args_1) => __awaiter(void 0, [...args_1], void 0, function* (page = 1, limit = 10, query) {
     const skip = (page - 1) * limit;
+    // Prepare the base query (filtering based on query params)
     const baseQuery = {};
+    // Check for filtering conditions (e.g., status)
     if (query.status) {
         baseQuery.status = query.status;
     }
-    const supportRequests = yield support_model_1.Support.find(baseQuery)
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(limit);
-    return supportRequests;
+    try {
+        // Get the total number of matching support requests (for pagination purposes)
+        const totalCount = yield support_model_1.Support.countDocuments(baseQuery);
+        // Get the paginated support requests based on the filters and pagination
+        const supportRequests = yield support_model_1.Support.find(baseQuery)
+            .sort({ createdAt: -1 }) // Sorting by created date in descending order
+            .skip(skip)
+            .limit(limit);
+        const totalPages = Math.ceil(totalCount / limit);
+        const meta = {
+            total: totalCount, // Total number of support requests matching the query
+            totalPages, // Total number of pages
+            page, // Current page number
+            limit, // Limit per page
+        };
+        // Prepare response data
+        return {
+            supportRequests,
+            meta,
+        };
+    }
+    catch (error) {
+        throw new Error('Error fetching support requests: ' + error.message);
+    }
 });
 const getSingleSupportRequest = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const supportRequest = yield support_model_1.Support.findById(id);

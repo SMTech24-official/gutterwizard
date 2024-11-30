@@ -9,7 +9,7 @@ const router=Router()
 router.post("/add-mail",subscriptionController.addMailIntoBD)
 
 router.get("/",auth(USER_ROLE.admin),subscriptionController.getAllSubscriptions)
-router.get("/send-mail",auth(USER_ROLE.admin),subscriptionController.sendMailMultipleUser)
+router.post("/send-mail",auth(USER_ROLE.admin),subscriptionController.sendMailMultipleUser)
 
 
 
